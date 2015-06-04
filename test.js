@@ -33,20 +33,14 @@ test('Does what the demo says', (is) => {
   );
 
   const myTemplate = ({data}, index) => ({data,
-    output: `${data.isPrivate ?
-      /* istanbul ignore next */ 'Private' :
-      'Public'
-    } n° ${index + 1}\n`
+    output: `${data.isPrivate ? 'Private' : 'Public'} n° ${index + 1}\n`
   });
 
   is.deepEqual(
     doxie([
       (comments) => comments.filter(myFilter),
       (comments) => comments.map(myTemplate),
-      (comments) => comments.map(({output}) => (
-        output ||
-        /* istanbul ignore next */ ''
-      )).join('')
+      (comments) => comments.map(({output}) => output || '').join('')
     ])(myData),
     'Public n° 1\nPublic n° 2\n',
     'outputting docs for humans'

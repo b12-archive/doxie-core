@@ -39,48 +39,55 @@ See for yourself:
 Demo
 ----
 
+Let’s see what happens without any plugins to pipe through:
+
 ```js
 import doxie from 'doxie-core'
 
 const myData = [
-  {isPrivate: false,  /* …dox comment data */},
-  {isPrivate: true,   /* …dox comment data */},
-  {isPrivate: false,  /* …dox comment data */},
+  {isPrivate: false},
+  {isPrivate: true},
+  {isPrivate: false},
 ];
-```
 
-```js
 doxie([])(myData);
 //» [
-//»   {data: {isPrivate: false, …}},
-//»   {data: {isPrivate: true, …}},
-//»   {data: {isPrivate: false, …}},
+//»   {data: {isPrivate: false}},
+//»   {data: {isPrivate: true}},
+//»   {data: {isPrivate: false}},
 //» ]
 ```
 
+
+Simple, but not very useful. Let’s try filtering that data:
+
 ```js
-let counter = 1;
-const myTemplate = (comment) => ({
-  output: comment.data.isPrivate ? null : `Visible ${counter++}!\n`
-});
+const myFilter = (comments) => comments.filter(({data}) => !data.isPrivate);
 
 doxie([
-  require('doxie.template-function')(myTemplate),
+  require('doxie.filter-function')(myFilter),
 ])(myData);
 //» [
-//»   {data: {isPrivate: false, …}, output: 'Visible 1!\n'},
-//»   {data: {isPrivate: true, …}, output: null},
-//»   {data: {isPrivate: false, …}, output: 'Visible 2!\n'},
+//»   {data: {isPrivate: false}},
+//»   {data: {isPrivate: false}},
 //» ]
 ```
 
+
+Fair enough. But the whole business is about outputting docs for humans. Let’s try that then:
+
 ```js
+const myTemplate = (comments) => comments.map(({data}, index) => (
+  {data, output: `${data.isPrivate ? 'Private' : 'Public'} n° ${index + 1}\n`}
+}));
+
 doxie([
+  require('doxie.filter-function')(myFilter),
   require('doxie.template-function')(myTemplate),
   require('doxie.to-string')(),
 ])(myData);
-//» "Visible 1!
-//» Visible 2!
+//» "Public n° 1
+//» Public n° 2
 //» "
 ```
 

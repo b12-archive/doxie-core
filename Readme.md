@@ -22,6 +22,7 @@ doxie-core
 
 **The heart of <http://npm.im/doxie>.**
 
+ 
 
 [*doxie*][] claims to be “the simplest docs generator you’ve seen”. This is the heart of it, so it’s inherently very simple.
 
@@ -36,7 +37,7 @@ See for yourself:
 
 
 Demo
-====
+----
 
 ```js
 import doxie from 'doxie-core'

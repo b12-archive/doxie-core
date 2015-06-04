@@ -65,7 +65,7 @@ Simple, but not very useful. Let’s try filtering that data:
 const myFilter = ({data}) => !data.isPrivate;
 
 doxie([
-  (comments) => comments.filter(myFilter),  // http://npm.im/doxie.filter
+  (comments) => comments.filter(myFilter),  // ☆ http://npm.im/doxie.filter
 ])(myData);
 //» [
 //»   {data: {isPrivate: false}},
@@ -82,9 +82,9 @@ const myTemplate = ({data}, index) => (
 });
 
 doxie([
-  (comments) => comments.filter(myFilter),  // http://npm.im/doxie.filter
-  (comments) => comments.map(myTemplate),   // http://npm.im/doxie.template
-  require('doxie.to-string')(),             // http://npm.im/doxie.to-string
+  (comments) => comments.filter(myFilter),  // ☆ http://npm.im/doxie.filter
+  (comments) => comments.map(myTemplate),   // ☆ http://npm.im/doxie.template
+  require('doxie.to-string')(),             // ☆ http://npm.im/doxie.to-string
 ])(myData);
 //» "Public n° 1
 //» Public n° 2

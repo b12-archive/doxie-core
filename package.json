@@ -1,6 +1,6 @@
-{ "name": "…"
+{ "name": "doxie-core"
 , "version": "0.0.0-work-in-progress"
-, "description": "…"
+, "description": "The heart of http://npm.im/doxie"
 
 , "dependencies":
   {}
@@ -38,11 +38,26 @@
 
 , "license": "MIT"
 , "keywords":
-  [ "…"
+  [ "jsdoc"
+  , "markdown"
+  , "documentation"
+  , "dox"
+  , "readme"
+  , "markdox-alternative"
+  , "doxme-alternative"
+  , "docco-alternative"
+  , "docs"
+  , "doc"
+  , "api"
+  , "template"
+  , "generator"
   ]
-, "author": "Tomek Wiszniewski <t.wiszniewski@gmail.com>"
+, "contributors":
+  [ "Tomek Wiszniewski <t.wiszniewski@gmail.com>"
+  ]
+, "copyright": "© 2015 Studio B12 GmbH (http://studio-b12.de)"
 , "repository":
   { "type": "git"
-  , "url": "git@github.com:tomekwi/….git"
+  , "url": "git@github.com:studio-b12/doxie-core.git"
   }
 }

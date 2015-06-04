@@ -23,9 +23,65 @@ doxie-core
 **The heart of <http://npm.im/doxie>.**
 
 
-**⚠ Heads up!** This is totally a work in progress. [Thoughts and ideas][] are very welcome.
+[*doxie*][] claims to be “the simplest docs generator you’ve seen”. This is the heart of it, so it’s inherently very simple.
 
-[Thoughts and ideas]:  https://github.com/studio-b12/doxie-core/issues
+All *doxie-core* does is take an array of data and pipe it through a bunch of plugins (functions). Just keep in mind that most plugins will expect [*dox*][]-compatible data. That’s it.
+
+[*doxie*]:  https://github.com/studio-b12/doxie
+[*dox*]:    https://github.com/tj/dox
+
+See for yourself:
+
+
+
+
+Demo
+====
+
+```js
+import doxie from 'doxie-core'
+
+const myData = [
+  {isPrivate: false,  /* …dox comment data */},
+  {isPrivate: true,   /* …dox comment data */},
+  {isPrivate: false,  /* …dox comment data */},
+];
+```
+
+```js
+doxie([])(myData);
+//» [
+//»   {data: {isPrivate: false, …}},
+//»   {data: {isPrivate: true, …}},
+//»   {data: {isPrivate: false, …}},
+//» ]
+```
+
+```js
+let counter = 1;
+const myTemplate = (comment) => ({
+  output: comment.data.isPrivate ? null : `Visible ${counter++}!\n`
+});
+
+doxie([
+  require('doxie.template-function')(myTemplate),
+])(myData);
+//» [
+//»   {data: {isPrivate: false, …}, output: 'Visible 1!\n'},
+//»   {data: {isPrivate: true, …}, output: null},
+//»   {data: {isPrivate: false, …}, output: 'Visible 2!\n'},
+//» ]
+```
+
+```js
+doxie([
+  require('doxie.template-function')(myTemplate),
+  require('doxie.to-string')(),
+])(myData);
+//» "Visible 1!
+//» Visible 2!
+//» "
+```
 
 
 

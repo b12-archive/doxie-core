@@ -3,7 +3,8 @@
 , "description": "The heart of http://npm.im/doxie"
 
 , "dependencies":
-  {}
+  { "1-liners": "^0.2.7"
+  }
 
 , "scripts":
   { "build": "cd module && babel --out-dir ../ *.js"

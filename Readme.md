@@ -52,6 +52,7 @@ const myData = [
 ];
 
 doxie([])(myData);
+
 //» [
 //»   {data: {isPrivate: false}},
 //»   {data: {isPrivate: true}},
@@ -68,6 +69,7 @@ const myFilter = ({data}) => !data.isPrivate;
 doxie([
   (comments) => comments.filter(myFilter),  // ☆ http://npm.im/doxie.filter
 ])(myData);
+
 //» [
 //»   {data: {isPrivate: false}},
 //»   {data: {isPrivate: false}},
@@ -90,6 +92,7 @@ doxie([
   (comments) => comments.map(({output}) => output || '').join(''),
     // ☆ http://npm.im/doxie.to-string
 ])(myData);
+
 //» "Public n° 1
 //» Public n° 2
 //» "

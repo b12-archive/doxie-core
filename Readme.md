@@ -62,10 +62,10 @@ doxie([])(myData);
 Simple, but not very useful. Let’s try filtering that data:
 
 ```js
-const myFilter = (comments) => comments.filter(({data}) => !data.isPrivate);
+const myFilter = ({data}) => !data.isPrivate;
 
 doxie([
-  require('doxie.filter-function')(myFilter),
+  (comments) => comments.filter(myFilter),  // http://npm.im/doxie.filter
 ])(myData);
 //» [
 //»   {data: {isPrivate: false}},
@@ -77,14 +77,14 @@ doxie([
 Fair enough. But the whole business is about outputting docs for humans. Let’s try that then:
 
 ```js
-const myTemplate = (comments) => comments.map(({data}, index) => (
+const myTemplate = ({data}, index) => (
   {data, output: `${data.isPrivate ? 'Private' : 'Public'} n° ${index + 1}\n`}
-}));
+});
 
 doxie([
-  require('doxie.filter-function')(myFilter),
-  require('doxie.template-function')(myTemplate),
-  require('doxie.to-string')(),
+  (comments) => comments.filter(myFilter),  // http://npm.im/doxie.filter
+  (comments) => comments.map(myTemplate),   // http://npm.im/doxie.template
+  require('doxie.to-string')(),             // http://npm.im/doxie.to-string
 ])(myData);
 //» "Public n° 1
 //» Public n° 2

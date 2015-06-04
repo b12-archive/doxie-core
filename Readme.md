@@ -82,7 +82,7 @@ const myTemplate = ({data}, index) => (
 });
 
 doxie([
-  (comments) => comments.filter(myFilter),  // ☆ http://npm.im/doxie.filter
+  (comments) => comments.filter(myFilter),
   (comments) => comments.map(myTemplate),   // ☆ http://npm.im/doxie.template
   require('doxie.to-string')(),             // ☆ http://npm.im/doxie.to-string
 ])(myData);

@@ -77,14 +77,17 @@ doxie([
 Fair enough. But the whole business is about outputting docs for humans. Let’s try that then:
 
 ```js
-const myTemplate = ({data}, index) => ({data,
-  output: `${data.isPrivate ? 'Private' : 'Public'} n° ${index + 1}\n`
-});
+let count = 0;
+const myTemplate = (data) => (
+  `${data.isPrivate ? 'Private' : 'Public'} n° ${++count}\n`
+);
 
 doxie([
   (comments) => comments.filter(myFilter),
-  (comments) => comments.map(myTemplate),   // ☆ http://npm.im/doxie.template
-  require('doxie.to-string')(),             // ☆ http://npm.im/doxie.to-string
+  (comments) => comments.map(({data}) => ({data, output: myTemplate(data)})),
+    // ☆ http://npm.im/doxie.template
+  (comments) => comments.map(({output}) => output || '').join(''),
+    // ☆ http://npm.im/doxie.to-string
 ])(myData);
 //» "Public n° 1
 //» Public n° 2

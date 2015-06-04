@@ -24,9 +24,9 @@ doxie-core
 
  
 
-[*doxie*][] claims to be “the simplest docs generator you’ve seen”. This is the heart of it, so it’s inherently very simple.
+The CLI program [*doxie*][] claims to be “the simplest docs generator you’ve seen”. *doxie-core* is the heart of [*doxie*][], so it’s inherently very simple.
 
-All *doxie-core* does is take an array of data and pipe it through a bunch of plugins (functions). Just keep in mind that most plugins will expect [*dox*][]-compatible data. That’s it.
+All it does is take an array of data and pipe it through a bunch of plugins (functions). Just keep in mind that most plugins will expect [*dox*][]-compatible data. That’s it.
 
 [*doxie*]:  https://github.com/studio-b12/doxie
 [*dox*]:    https://github.com/tj/dox

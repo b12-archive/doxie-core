@@ -77,8 +77,8 @@ doxie([
 Fair enough. But the whole business is about outputting docs for humans. Let’s try that then:
 
 ```js
-const myTemplate = ({data}, index) => (
-  {data, output: `${data.isPrivate ? 'Private' : 'Public'} n° ${index + 1}\n`}
+const myTemplate = ({data}, index) => ({data,
+  output: `${data.isPrivate ? 'Private' : 'Public'} n° ${index + 1}\n`
 });
 
 doxie([

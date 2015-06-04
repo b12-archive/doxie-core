@@ -1,5 +1,5 @@
 { "name": "doxie-core"
-, "version": "0.0.0-work-in-progress"
+, "version": "0.1.0"
 , "description": "The heart of http://npm.im/doxie"
 
 , "dependencies":

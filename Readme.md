@@ -22,6 +22,25 @@ doxie-core
 
 **The heart of <http://npm.im/doxie>.**
 
+
+
+
+<p align="center"><a
+  title="Graphic by the great Justin Mezzell"
+  href="http://justinmezzell.tumblr.com/post/89652317743"
+  >
+  <br/>
+  <br/>
+  <img
+    src="Readme/Compass.gif"
+    width="400"
+    height="300"
+  />
+  <br/>
+  <br/>
+</a></p>
+
+
  
 
 The CLI program [*doxie*][] claims to be “the simplest docs generator you’ve seen”. *doxie-core* is the heart of [*doxie*][], so it’s inherently [very simple][].

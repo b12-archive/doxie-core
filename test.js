@@ -11,11 +11,11 @@ test('Does what the demo says', (is) => {
 
   is.deepEqual(
     doxie([])(myData),
-    [
+    {chunks: [
       {data: {isPrivate: false}},
       {data: {isPrivate: true}},
       {data: {isPrivate: false}},
-    ],
+    ], error: null, version: '1'},
     'without any plugins to pipe through'
   );
 
@@ -24,7 +24,7 @@ test('Does what the demo says', (is) => {
   is.deepEqual(
     doxie([
       (comments) => comments.filter(myFilter),
-    ])(myData),
+    ])(myData).chunks,
     [
       {data: {isPrivate: false}},
       {data: {isPrivate: false}},
@@ -41,7 +41,7 @@ test('Does what the demo says', (is) => {
       (comments) => comments.filter(myFilter),
       (comments) => comments.map(myTemplate),
       (comments) => comments.map(({output}) => output || '').join('')
-    ])(myData),
+    ])(myData).output,
     'Public n° 1\nPublic n° 2\n',
     'outputting docs for humans'
   );

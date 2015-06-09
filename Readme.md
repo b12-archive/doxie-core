@@ -163,7 +163,39 @@ Parameters:
 Writing a plugin
 ----------------
 
-Every plugin for *doxie* is a function. Here’s the signature it should match:
+Every plugin for *doxie* is a function. The functions are composed with one another to form a functional pipeline. To give you an idea of this, these are roughly equivalent:
+
+```sh
+$ doxie --plugin1 --plugin2 --plugin3
+```
+
+```js
+require('doxie-core')([
+  require('doxie.plugin1')(),  // Returns a plugin function.
+  require('doxie.plugin2')(),  // Returns a plugin function.
+  require('doxie.plugin3')(),  // Returns a plugin function.
+]);
+```
+
+```js
+require('doxie-core')([
+  ({chunks, version}) => {
+    require('doxie.plugin3')()(
+      require('doxie.plugin2')()(
+        require('doxie.plugin1')()(
+          {chunks, version}
+        )
+      )
+    )
+  },
+]);
+```
+
+
+**Heads up!** *doxie-core* is a very simple, slim system. A good deal of power has been given to plugin authors. A plugin can do a lot – but with power comes responsibility. When writing a plugin make sure you know the rules and keep to them. You can easily break other plugins otherwise.
+
+
+Here’s the signature your plugin function should match:
 
 <h3                                       id="/writing-a-plugin/signature"><pre>
 plugin({chunks, version})

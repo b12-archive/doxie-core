@@ -3,14 +3,14 @@ const test = require('tape-catch');
 import doxie from './module/index';
 
 test('Does what the demo says', (is) => {
-  const myData = [
+  const doxComments = [
     {isPrivate: false},
     {isPrivate: true},
     {isPrivate: false},
   ];
 
   is.deepEqual(
-    doxie([])(myData),
+    doxie([])(doxComments),
     {chunks: [
       {data: {isPrivate: false}},
       {data: {isPrivate: true}},
@@ -23,8 +23,10 @@ test('Does what the demo says', (is) => {
 
   is.deepEqual(
     doxie([
-      (comments) => comments.filter(myFilter),
-    ])(myData).chunks,
+      (input) => Object.assign({}, input, {chunks:
+        input.chunks.filter(myFilter),
+      }),  // ☆ http://npm.im/doxie.filter
+    ])(doxComments).chunks,
     [
       {data: {isPrivate: false}},
       {data: {isPrivate: false}},
@@ -32,17 +34,26 @@ test('Does what the demo says', (is) => {
     'filtering data'
   );
 
-  const myTemplate = ({data}, index) => ({data,
-    output: `${data.isPrivate ? 'Private' : 'Public'} n° ${index + 1}\n`
+  let counter = 1;
+  const myTemplate = ({data}) => ({data,
+    output: `${data.isPrivate ? 'Private' : 'Public'} comment ${counter++}\n`
   });
 
   is.deepEqual(
     doxie([
-      (comments) => comments.filter(myFilter),
-      (comments) => comments.map(myTemplate),
-      (comments) => comments.map(({output}) => output || '').join('')
-    ])(myData).output,
-    'Public n° 1\nPublic n° 2\n',
+      (input) => Object.assign({}, input, {chunks:
+        input.chunks.filter(myFilter),
+      }),
+
+      (input) => Object.assign({}, input, {chunks:
+        input.chunks.map(myTemplate)
+      }),  // ☆ http://npm.im/doxie.template
+
+      (input) => Object.assign({}, input, {output:
+        input.chunks.map(({output}) => output || '').join('')
+      }),  // ☆ http://npm.im/doxie.to-string
+    ])(doxComments).output,
+    'Public comment 1\nPublic comment 2\n',
     'outputting docs for humans'
   );
 

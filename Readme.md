@@ -64,19 +64,19 @@ Let’s see what happens without any plugins to pipe through:
 ```js
 import doxie from 'doxie-core'
 
-const myData = [
+const doxComments = [
   {isPrivate: false},
   {isPrivate: true},
   {isPrivate: false},
 ];
 
-doxie([])(myData);
+doxie([])(doxComments);
 
-//» [
+//» {chunks: [
 //»   {data: {isPrivate: false}},
 //»   {data: {isPrivate: true}},
 //»   {data: {isPrivate: false}},
-//» ]
+//» ], error: null, version: '1'}
 ```
 
 
@@ -87,7 +87,7 @@ const myFilter = ({data}) => !data.isPrivate;
 
 doxie([
   (comments) => comments.filter(myFilter),  // ☆ http://npm.im/doxie.filter
-])(myData);
+])(doxComments).chunks;
 
 //» [
 //»   {data: {isPrivate: false}},
@@ -101,19 +101,21 @@ Fair enough. But the whole business is about outputting docs for humans. Let’s
 ```js
 let count = 0;
 const myTemplate = (data) => (
-  `${data.isPrivate ? 'Private' : 'Public'} n° ${++count}\n`
+  `${data.isPrivate ? 'Private' : 'Public'} comment ${++count}\n`
 );
 
 doxie([
   (comments) => comments.filter(myFilter),
+
   (comments) => comments.map(({data}) => ({data, output: myTemplate(data)})),
     // ☆ http://npm.im/doxie.template
+
   (comments) => comments.map(({output}) => output || '').join(''),
     // ☆ http://npm.im/doxie.to-string
-])(myData);
+])(doxComments).output;
 
-//» "Public n° 1
-//» Public n° 2
+//» "Public comment 1
+//» Public comment 2
 //» "
 ```
 

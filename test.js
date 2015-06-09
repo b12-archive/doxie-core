@@ -1,6 +1,7 @@
-const test = require('tape-catch');
-
 import doxie from './module/index';
+
+const test = require('tape-catch');
+const assign = require('object-assign');
 
 test('Does what the demo says', (is) => {
   const doxComments = [
@@ -23,7 +24,7 @@ test('Does what the demo says', (is) => {
 
   is.deepEqual(
     doxie([
-      (input) => Object.assign({}, input, {chunks:
+      (input) => assign({}, input, {chunks:
         input.chunks.filter(myFilter),
       }),  // ☆ http://npm.im/doxie.filter
     ])(doxComments).chunks,
@@ -41,15 +42,15 @@ test('Does what the demo says', (is) => {
 
   is.deepEqual(
     doxie([
-      (input) => Object.assign({}, input, {chunks:
+      (input) => assign({}, input, {chunks:
         input.chunks.filter(myFilter),
       }),
 
-      (input) => Object.assign({}, input, {chunks:
+      (input) => assign({}, input, {chunks:
         input.chunks.map(myTemplate)
       }),  // ☆ http://npm.im/doxie.template
 
-      (input) => Object.assign({}, input, {output:
+      (input) => assign({}, input, {output:
         input.chunks.map(({output}) => output || '').join('')
       }),  // ☆ http://npm.im/doxie.to-string
     ])(doxComments).output,

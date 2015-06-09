@@ -7,7 +7,6 @@ export default (plugins) => {
     const input = {
       chunks: doxOutput.map((data) => ({data})),
       version: '1',
-      error: null,
     };
 
     return transform(input);

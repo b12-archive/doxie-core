@@ -76,7 +76,7 @@ doxie([])(doxComments);
 //»   {data: {isPrivate: false}},
 //»   {data: {isPrivate: true}},
 //»   {data: {isPrivate: false}},
-//» ], error: null, version: '1'}
+//» ], version: '1'}
 ```
 
 

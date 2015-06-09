@@ -193,7 +193,7 @@ The input object is passed directly by *doxie-core* if the `plugin` is the first
 
 * **`version`**
   <sup>{Number}</sup>  
-  The exact number `1`.
+  The exact number `1`. We pass it so you can make sure that your plugin is compatible with the input it receives.
 
 
 <h5                                               id="/writing-a-plugin/output">

@@ -86,7 +86,7 @@ Simple, but not very useful. Let’s try filtering that data:
 const myFilter = ({data}) => !data.isPrivate;
 
 doxie([
-  (comments) => comments.filter(myFilter),  // ☆ http://npm.im/doxie.filter
+  require('doxie.filter')(myFilter),
 ])(doxComments).chunks;
 
 //» [
@@ -99,19 +99,15 @@ doxie([
 Fair enough. But the whole business is about outputting docs for humans. Let’s try that then:
 
 ```js
-let count = 0;
-const myTemplate = (data) => (
-  `${data.isPrivate ? 'Private' : 'Public'} comment ${++count}\n`
-);
+let counter = 1;
+const myTemplate = ({data}) => ({data,
+  output: `${data.isPrivate ? 'Private' : 'Public'} comment ${counter++}\n`
+});
 
 doxie([
-  (comments) => comments.filter(myFilter),
-
-  (comments) => comments.map(({data}) => ({data, output: myTemplate(data)})),
-    // ☆ http://npm.im/doxie.template
-
-  (comments) => comments.map(({output}) => output || '').join(''),
-    // ☆ http://npm.im/doxie.to-string
+  require('doxie.filter')(myFilter),
+  require('doxie.template')(myTemplate),
+  require('doxie.output')(),
 ])(doxComments).output;
 
 //» "Public comment 1

@@ -128,16 +128,16 @@ $ npm install doxie-core
 
 
 
-<a                                                                 id="api"></a>
+<a                                                                id="/api"></a>
 API
 ---
 
-<h3                                                     id="api/signature"><pre>
+<h3                                                    id="/api/signature"><pre>
 doxie-core(plugins, [{stdout, stderr}])
   → pipeline
 </pre></h3>
 
-<h5                                                         id="api/parameters">
+<h5                                                        id="/api/parameters">
 Parameters:
 </h5>
 
@@ -154,24 +154,24 @@ Parameters:
   If set, the `error` of each plugin will be written to this stream.
 
 [ready-made plugins]:  https://www.npmjs.com/browse/keyword/doxie-plugin
-[write your own]:      #writing-a-plugin
+[write your own]:      #/writing-a-plugin
 
 
 
 
-<a                                                    id="writing-a-plugin"></a>
+<a                                                   id="/writing-a-plugin"></a>
 Writing a plugin
 ----------------
 
 Every plugin for *doxie* is a function. Here’s the signature it should match:
 
-<h3                                        id="writing-a-plugin/signature"><pre>
+<h3                                       id="/writing-a-plugin/signature"><pre>
 plugin({chunks, version})
   → {chunks, version, [output], [error]}
 </pre></h3>
 
 
-<h5                                                 id="writing-a-plugin/input">
+<h5                                                id="/writing-a-plugin/input">
 Input object properties:
 </h5>
 
@@ -196,7 +196,7 @@ The input object is passed directly by *doxie-core* if the `plugin` is the first
   The exact number `1`.
 
 
-<h5                                                id="writing-a-plugin/output">
+<h5                                               id="/writing-a-plugin/output">
 Output object properties:
 </h5>
 

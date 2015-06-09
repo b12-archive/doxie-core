@@ -76,7 +76,7 @@ doxie([])(doxComments);
 //»   {data: {isPrivate: false}},
 //»   {data: {isPrivate: true}},
 //»   {data: {isPrivate: false}},
-//» ], version: '1'}
+//» ], version: 1}
 ```
 
 
@@ -187,8 +187,8 @@ The input object is passed directly by *doxie-core* if the `plugin` is the first
   `chunk.output` is populated if other plugins have generated output for this chunk.
 
 * **`version`**
-  <sup>{String}</sup>  
-  The exact string `"1"`.
+  <sup>{Number}</sup>  
+  The exact number `1`.
 
 
 **Output object properties:**
@@ -208,8 +208,8 @@ The output object is processed by *doxie* to produce side-effects – and passed
   The rendered text output of this chunk.
 
 * **`version`**
-  <sup>{String}</sup>  
-  The exact string `"1"`.
+  <sup>{Number}</sup>  
+  The exact number `1`.
 
 * **`[error]`**
   <sup>{*}</sup>  

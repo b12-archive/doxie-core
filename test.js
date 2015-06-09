@@ -15,7 +15,7 @@ test('Does what the demo says', (is) => {
       {data: {isPrivate: false}},
       {data: {isPrivate: true}},
       {data: {isPrivate: false}},
-    ], version: '1'},
+    ], version: 1},
     'without any plugins to pipe through'
   );
 

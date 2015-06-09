@@ -128,15 +128,18 @@ $ npm install doxie-core
 
 
 
+<a                                                                 id="api"></a>
 API
 ---
 
-<h3><pre>
+<h3                                                     id="api/signature"><pre>
 doxie-core(plugins, [{stdout, stderr}])
   → pipeline
 </pre></h3>
 
-**Parameters:**
+<h5                                                         id="api/parameters">
+Parameters:
+</h5>
 
 * **`plugins`**
   <sup>{Function[]}</sup>  
@@ -162,13 +165,15 @@ Writing a plugin
 
 Every plugin for *doxie* is a function. Here’s the signature it should match:
 
-<h3><pre>
+<h3                                        id="writing-a-plugin/signature"><pre>
 plugin({chunks, version})
   → {chunks, version, [output], [error]}
 </pre></h3>
 
 
-**Input object properties:**
+<h5                                                 id="writing-a-plugin/input">
+Input object properties:
+</h5>
 
 The input object is passed directly by *doxie-core* if the `plugin` is the first in the functional pipeline. Otherwise it’s the output of the former plugin.
 
@@ -191,7 +196,9 @@ The input object is passed directly by *doxie-core* if the `plugin` is the first
   The exact number `1`.
 
 
-**Output object properties:**
+<h5                                                id="writing-a-plugin/output">
+Output object properties:
+</h5>
 
 The output object is processed by *doxie* to produce side-effects – and passed unchanged as input to the subsequent plugin.
 

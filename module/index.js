@@ -3,8 +3,12 @@ const identity = require('1-liners/identity');
 
 export default (plugins) => {
   const transform = plugins.reduce(pipe, identity);
-  return (input) => {
-    const inputData = input.map((data) => ({data}));
-    return transform(inputData);
+  return (doxOutput) => {
+    const input = {
+      chunks: doxOutput.map((data) => ({data})),
+      version: 1,
+    };
+
+    return transform(input);
   };
 };

@@ -1,5 +1,4 @@
 const pipe = require('1-liners/pipe');
-const identity = require('1-liners/identity');
 
 export default (
   plugins,
@@ -17,7 +16,7 @@ export default (
     null
   );
 
-  const transform = plugins
+  return plugins
     .map((plugin) => (...args) => {
       let result = plugin(...args);
       let {error, output} = result;
@@ -25,15 +24,9 @@ export default (
       if (error && writeError) writeError(error);
       return result;
     })
-    .reduce(pipe, identity)
-  ;
-
-  return (doxOutput) => {
-    const input = {
-      chunks: doxOutput.map((data) => ({data})),
+    .reduce(pipe, (input) => ({
+      chunks: input.map((data) => ({data})),
       version: 1,
-    };
-
-    return transform(input);
-  };
+    }))
+  ;
 };

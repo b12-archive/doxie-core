@@ -60,3 +60,23 @@ test('Does what the demo says', (is) => {
 
   is.end();
 });
+
+test('Prints to stdout and stderr', (is) => {
+  is.plan(2);
+
+  doxie([
+    () => ({output: 'Hey!'}),  // TODO: Should we rename `output` to `stdout`?
+    () => ({error: 'Oops!'}),  // TODO: Should we rename `error` to `stderr`?
+  ], {
+    stdout: {write: (message) => is.equal(message,
+      'Hey!',
+      'stdout'
+    )},
+    stderr: {write: (message) => is.equal(message,
+      'Oops!',
+      'stderr'
+    )},
+  })([]);
+
+  is.end();
+});

@@ -134,8 +134,9 @@ API
 
 <h3                                                    id="/api/signature"><pre>
 doxie-core(plugins, [{stdout, stderr}])
-  → pipeline
+  → pipeline(data)
 </pre></h3>
+
 
 <h5                                                        id="/api/parameters">
 Parameters:
@@ -153,8 +154,20 @@ Parameters:
   <sup>{Writable Stream}</sup>  
   If set, the `error` of each plugin will be written to this stream.
 
-[ready-made plugins]:  https://www.npmjs.com/browse/keyword/doxie-plugin
-[write your own]:      #/writing-a-plugin
+
+<h5                                                      id="/api/return-value">
+Return value:
+</h5>
+
+* **`pipeline(data)`**
+  <sup>{Function}</sup>  
+  A function composed of [plugin functions][]. Feed it an array of data (like the one that comes out of [`dox.parseComments`][]). It’ll be passed to plugins – they’ll deal with it.
+
+
+[ready-made plugins]:   https://www.npmjs.com/browse/keyword/doxie-plugin
+[write your own]:       #/writing-a-plugin
+[plugin functions]:     #/writing-a-plugin/signature
+[`dox.parseComments`]:  https://github.com/tj/dox/tree/v0.8.0#programmatic-usage
 
 
 

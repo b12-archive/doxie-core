@@ -192,7 +192,7 @@ require('doxie-core')([
 ```
 
 
-**Heads up!** *doxie-core* is a very simple, slim system. A good deal of power has been given to plugin authors. A plugin can do a lot – but with power comes responsibility. When writing a plugin make sure you know the rules and keep to them. You can easily break other plugins otherwise.
+**Heads up!** *doxie-core* is a very simple, slim system. We give a lot of power to plugin authors. But beware! With power comes responsibility. When writing a plugin make sure you know the rules and keep to them. You can easily break other plugins otherwise.
 
 
 Here’s the signature your plugin function should match:

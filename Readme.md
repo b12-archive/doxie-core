@@ -144,7 +144,7 @@ Parameters:
 
 * **`plugins`**
   <sup>{Function[]}</sup>  
-  An array of plugin functions. You can pick one of the [ready-made plugins][] or [write your own][].
+  An array of [plugin functions][]. You can pick one of the [ready-made plugins][] or [write your own][].
 
 * **`[options.stdout]`**
   <sup>{Writable Stream}</sup>  

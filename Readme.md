@@ -265,13 +265,13 @@ You’ll probably find yourself returning an object similar to the input object,
   <sup>{Number}</sup>  
   The exact number `1`.
 
-* **`[error]`**
-  <sup>{*}</sup>  
-  If `stderr` is defined, `error` will be written to `stderr`.
-
 * **`[output]`**
-  <sup>{*}</sup>  
-  If `stdout` is defined, `output` will be written to `stdout`.
+  <sup>{String}</sup>  
+  If the stream `stdout` is defined, `output` will be written to it. Keep in mind that node’s `process.stdout` only accepts strings.
+
+* **`[error]`**
+  <sup>{String}</sup>  
+  If the stream `stderr` is defined, `error` will be written to it. Keep in mind that node’s `process.stderr` only accepts strings.
 
 
 [`Object.freeze`]:  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze

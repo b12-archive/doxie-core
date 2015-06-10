@@ -220,7 +220,7 @@ plugin({chunks, version})
 Input object properties:
 </h5>
 
-The input object is passed directly by *doxie-core* if the `plugin` is the first in the functional pipeline. Otherwise it’s the output of the former plugin.
+The input object is passed directly by *doxie-core* if the `plugin` is first in the plugin pipeline. Otherwise it’s the output of the former plugin.
 
 * **`chunks`**
   <sup>{Object[]}</sup>  

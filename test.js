@@ -65,8 +65,8 @@ test('Prints to stdout and stderr', (is) => {
   is.plan(2);
 
   doxie([
-    () => ({output: 'Hey!'}),  // TODO: Should we rename `output` to `stdout`?
-    () => ({error: 'Oops!'}),  // TODO: Should we rename `error` to `stderr`?
+    () => ({output: 'Hey!'}),
+    () => ({error: 'Oops!'}),
   ], {
     stdout: {write: (message) => is.equal(message,
       'Hey!',

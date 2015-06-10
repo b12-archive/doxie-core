@@ -2,7 +2,7 @@ const pipe = require('1-liners/pipe');
 
 export default (
   plugins,
-  {stdout = null, stderr = null} = {}
+  {stdout = null, stderr = null} = {}  /* jshint ignore: line */
 ) => {
   const writeOutput = (
     stdout && typeof stdout.write === 'function' ?

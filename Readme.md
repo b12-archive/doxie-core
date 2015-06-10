@@ -247,6 +247,8 @@ Output object properties:
 
 The output object is processed by *doxie* to produce side-effects – and passed unchanged as input to the subsequent plugin.
 
+You’ll probably find yourself returning an object similar to the input object, changing just a couple of properties. Don’t be tempted to change the object though. This is the only single copy of the data, and access to it might still be needed by other plugins. Always return a new object. You can use [`Object.freeze`][] to protect yourself from other plugins mutating your object.
+
 * **`chunks`**
   <sup>{Object[]}</sup>  
   The array of `chunks`. See the input `chunks` property for more info.
@@ -270,6 +272,9 @@ The output object is processed by *doxie* to produce side-effects – and passed
 * **`[output]`**
   <sup>{*}</sup>  
   If `stdout` is defined, `output` will be written to `stdout`.
+
+
+[`Object.freeze`]:  https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/freeze
 
 
 

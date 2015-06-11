@@ -3,6 +3,10 @@ import doxie from './module/index';
 const test = require('tape-catch');
 const assign = require('object-assign');
 
+const issue = (id, title) => {
+  return `${title} (http://github.com/doxie-core/issue/${id})`;
+};
+
 test('Does what the demo says', (is) => {
   const doxComments = [
     {isPrivate: false},
@@ -61,7 +65,7 @@ test('Does what the demo says', (is) => {
   is.end();
 });
 
-test('Prints to stdout and stderr', (is) => {
+test(issue(1, 'Prints to stdout and stderr'), (is) => {
   is.plan(2);
 
   doxie([
@@ -78,5 +82,9 @@ test('Prints to stdout and stderr', (is) => {
     )},
   })([]);
 
+  is.end();
+});
+
+test.skip(issue(5, 'Checks if plugins are well-behaved'), (is) => {
   is.end();
 });

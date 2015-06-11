@@ -85,6 +85,38 @@ test(issue(1, 'Prints to stdout and stderr'), (is) => {
   is.end();
 });
 
-test.skip(issue(5, 'Checks if plugins are well-behaved'), (is) => {
+test(issue(5, 'Checks if plugins are well-behaved'), (is) => {
+  is.throws(
+    doxie([
+      () => null,
+    ]),
+    /should .*an object/i,
+    'if each plugin returns an object'
+  );
+
+  is.throws(
+    doxie([
+      () => ({version: '1'}),
+    ]),
+    /should .*a `{Number} version`/i,
+    'with a `{Number} version`'
+  );
+
+  is.throws(
+    doxie([
+      () => ({version: 0.9}),
+    ]),
+    /should .*`1`/i,
+    'which equals `1` in doxie-core <2.0.0'
+  );
+
+  is.throws(
+    doxie([
+      () => ({version: 1}),
+    ]),
+    /should .*an `{Array} chunks`/i,
+    'with an `{Array} chunks`'
+  );
+
   is.end();
 });

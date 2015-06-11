@@ -7,15 +7,20 @@ const issue = (id, title) => {
   return `${title} (http://github.com/doxie-core/issue/${id})`;
 };
 
-test('Does what the demo says', (is) => {
-  const doxComments = [
-    {isPrivate: false},
-    {isPrivate: true},
-    {isPrivate: false},
-  ];
+const data = (args) => assign({
+  chunks: [],
+  version: 1,
+}, args);
 
+const dummyDoxOutput = [
+  {isPrivate: false},
+  {isPrivate: true},
+  {isPrivate: false},
+];
+
+test('Does what the demo says', (is) => {
   is.deepEqual(
-    doxie([])(doxComments),
+    doxie([])(dummyDoxOutput),
     {chunks: [
       {data: {isPrivate: false}},
       {data: {isPrivate: true}},
@@ -31,7 +36,7 @@ test('Does what the demo says', (is) => {
       (input) => assign({}, input, {chunks:
         input.chunks.filter(myFilter),
       }),  // ☆ http://npm.im/doxie.filter
-    ])(doxComments).chunks,
+    ])(dummyDoxOutput).chunks,
     [
       {data: {isPrivate: false}},
       {data: {isPrivate: false}},
@@ -57,7 +62,7 @@ test('Does what the demo says', (is) => {
       (input) => assign({}, input, {output:
         input.chunks.map(({output}) => output || '').join('')
       }),  // ☆ http://npm.im/doxie.to-string
-    ])(doxComments).output,
+    ])(dummyDoxOutput).output,
     'Public comment 1\nPublic comment 2\n',
     'outputting docs for humans'
   );
@@ -69,8 +74,8 @@ test(issue(1, 'Prints to stdout and stderr'), (is) => {
   is.plan(2);
 
   doxie([
-    () => ({output: 'Hey!'}),
-    () => ({error: 'Oops!'}),
+    () => data({output: 'Hey!'}),
+    () => data({error: 'Oops!'}),
   ], {
     stdout: {write: (message) => is.equal(message,
       'Hey!',
@@ -85,6 +90,38 @@ test(issue(1, 'Prints to stdout and stderr'), (is) => {
   is.end();
 });
 
-test.skip(issue(5, 'Checks if plugins are well-behaved'), (is) => {
+test(issue(5, 'Checks if plugins are well-behaved'), (is) => {
+  is.throws(
+    () => doxie([
+      () => null,
+    ])(dummyDoxOutput),
+    /should .*a data object/i,
+    'if each plugin returns an object'
+  );
+
+  is.throws(
+    () => doxie([
+      () => ({version: '1'}),
+    ])(dummyDoxOutput),
+    /should .*a `{Number} version`/i,
+    'with a `{Number} version`'
+  );
+
+  is.throws(
+    () => doxie([
+      () => ({version: 0.9}),
+    ])(dummyDoxOutput),
+    /should .*`1`/i,
+    'which equals `1` in doxie-core <2.0.0'
+  );
+
+  is.throws(
+    () => doxie([
+      () => ({version: 1}),
+    ])(dummyDoxOutput),
+    /should .*an `{Array} chunks`/i,
+    'with an `{Array} chunks`'
+  );
+
   is.end();
 });

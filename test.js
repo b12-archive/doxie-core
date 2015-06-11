@@ -92,33 +92,33 @@ test(issue(1, 'Prints to stdout and stderr'), (is) => {
 
 test(issue(5, 'Checks if plugins are well-behaved'), (is) => {
   is.throws(
-    doxie([
+    () => doxie([
       () => null,
-    ]),
-    /should .*an object/i,
+    ])(dummyDoxOutput),
+    /should .*a data object/i,
     'if each plugin returns an object'
   );
 
   is.throws(
-    doxie([
+    () => doxie([
       () => ({version: '1'}),
-    ]),
+    ])(dummyDoxOutput),
     /should .*a `{Number} version`/i,
     'with a `{Number} version`'
   );
 
   is.throws(
-    doxie([
+    () => doxie([
       () => ({version: 0.9}),
-    ]),
+    ])(dummyDoxOutput),
     /should .*`1`/i,
     'which equals `1` in doxie-core <2.0.0'
   );
 
   is.throws(
-    doxie([
+    () => doxie([
       () => ({version: 1}),
-    ]),
+    ])(dummyDoxOutput),
     /should .*an `{Array} chunks`/i,
     'with an `{Array} chunks`'
   );

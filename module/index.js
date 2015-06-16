@@ -3,8 +3,10 @@ const {cyan} = require('chalk');
 const tinyError = require('tiny-error');
 const {isArray} = Array;
 
+const prefix = `${cyan('[doxie]')} `;
+const coreError = tinyError({prefix});
 const pluginError = tinyError({
-  prefix: `${cyan('[doxie]')} Got invalid data from a plugin. `,
+  prefix: prefix + 'Got invalid data from a plugin. ',
 });
 
 export default (
@@ -51,9 +53,16 @@ export default (
       if (error && writeError) writeError(error);
       return result;
     })
-    .reduce(pipe, (input) => ({
-      chunks: input.map((data) => ({data})),
-      version: 1,
-    }))
+    .reduce(pipe, (input) => {
+      if (!isArray(input)) throw coreError(
+        'Wrong input data. Expecting an array.'
+      );
+        // TODO: Test this.
+
+      return {
+        chunks: input.map((data) => ({data})),
+        version: 1,
+      };
+    })
   ;
 };

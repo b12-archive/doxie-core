@@ -25,6 +25,8 @@ export default (
 
   return plugins
     .map((plugin) => (...args) => {
+      // TODO: Check if `plugin` is a function
+
       let result = plugin(...args);
 
       if (!result || typeof result !== 'object') throw pluginError(

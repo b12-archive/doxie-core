@@ -14,7 +14,7 @@
   , "coveralls": "npm run coverage && cat ./coverage/lcov.info | coveralls"
   , "coverage": "isparta cover test.js"
   , "develop": "nodangel --ignore node_modules --ignore coverage --exec 'npm run --silent test:lite'"
-  , "prepublish": "npm run clean && npm run build"
+  , "prepublish": "npm run --silent clean && npm run build"
   , "test": "jshint . && babel *.js module/*.js --out-dir .es5 && node .es5/test.js | tap-spec"
   , "test:lite": "babel-node test.js | tap-spec"
   , "view-coverage": "echo 'Generating coverage reports...'; npm run coverage >/dev/null && echo '...done.' && xdg-open ./coverage/lcov-report/index.html >/dev/null"

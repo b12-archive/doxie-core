@@ -3,7 +3,7 @@ const {cyan} = require('chalk');
 const tinyError = require('tiny-error');
 const {isArray} = Array;
 
-const prefix = `${cyan('[doxie]')} `;
+const prefix = `${cyan('[doxie-core]')} `;
 const coreError = tinyError({prefix});
 const pluginError = tinyError({
   prefix: prefix + 'Got invalid data from a plugin. ',

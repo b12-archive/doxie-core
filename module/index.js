@@ -35,7 +35,7 @@ export default (
         'It should have returned a data object.'
       );
 
-      let {version, chunks, error, output} = result;
+      let {version, docs, error, output} = result;
 
       if (typeof version !== 'number') throw pluginError(
         'The returned data should contain a `{Number} version`'
@@ -45,8 +45,8 @@ export default (
         'The returned `version` should equal `1` in doxie <2.0.0'
       );
 
-      if (!isArray(chunks)) throw pluginError(
-        'The returned data should contain an `{Array} chunks`'
+      if (!isArray(docs)) throw pluginError(
+        'The returned data should contain an `{Array} docs`'
       );
 
       if (output && writeOutput) writeOutput(output);
@@ -60,7 +60,7 @@ export default (
         // TODO: Test this.
 
       return {
-        chunks: input.map((data) => ({data})),
+        docs: input.map((data) => ({data})),
         version: 1,
       };
     })

@@ -8,7 +8,7 @@ const issue = (id, title) => {
 };
 
 const data = (args) => assign({
-  chunks: [],
+  docs: [],
   version: 1,
 }, args);
 
@@ -21,7 +21,7 @@ const dummyDoxOutput = [
 test('Does what the demo says', (is) => {
   is.deepEqual(
     doxie([])(dummyDoxOutput),
-    {chunks: [
+    {docs: [
       {data: {isPrivate: false}},
       {data: {isPrivate: true}},
       {data: {isPrivate: false}},
@@ -33,10 +33,10 @@ test('Does what the demo says', (is) => {
 
   is.deepEqual(
     doxie([
-      (input) => assign({}, input, {chunks:
-        input.chunks.filter(myFilter),
+      (input) => assign({}, input, {docs:
+        input.docs.filter(myFilter),
       }),  // ☆ http://npm.im/doxie.filter
-    ])(dummyDoxOutput).chunks,
+    ])(dummyDoxOutput).docs,
     [
       {data: {isPrivate: false}},
       {data: {isPrivate: false}},
@@ -51,16 +51,16 @@ test('Does what the demo says', (is) => {
 
   is.deepEqual(
     doxie([
-      (input) => assign({}, input, {chunks:
-        input.chunks.filter(myFilter),
+      (input) => assign({}, input, {docs:
+        input.docs.filter(myFilter),
       }),
 
-      (input) => assign({}, input, {chunks:
-        input.chunks.map(myTemplate)
+      (input) => assign({}, input, {docs:
+        input.docs.map(myTemplate)
       }),  // ☆ http://npm.im/doxie.template
 
       (input) => assign({}, input, {output:
-        input.chunks.map(({output}) => output || '').join('')
+        input.docs.map(({output}) => output || '').join('')
       }),  // ☆ http://npm.im/doxie.to-string
     ])(dummyDoxOutput).output,
     'Public comment 1\nPublic comment 2\n',
@@ -119,8 +119,8 @@ test(issue(5, 'Checks if plugins are well-behaved'), (is) => {
     () => doxie([
       () => ({version: 1}),
     ])(dummyDoxOutput),
-    /should .*an `{Array} chunks`/i,
-    'with an `{Array} chunks`'
+    /should .*an `{Array} docs`/i,
+    'with an `{Array} docs`'
   );
 
   is.end();
